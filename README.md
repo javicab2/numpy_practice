@@ -6,3 +6,4 @@ Practice with numpy library
 - Broadcasting
 - Indexing
 - Default arrays
+- Save and load files
