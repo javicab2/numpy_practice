@@ -11,10 +11,11 @@ array_a = np.array([1,2,3,4,5]) #vector
 print(array_a)
 print(array_a.shape)  #tamaño 
 
-array_b = np.array([[1,2,3,4,5],[6,7,8,9,10]]) #matriz
+array_b = np.array([[1,2,3,5,4],[6,7,8,9,10]]) #matriz
 
 print(array_b)
-print(array_b.shape)
+print(array_b.dtype)  #tipo de arreglo
+print(array_b.shape)   #um de fila, num columna
 print(array_b.size)    #fila por columna
 
 
@@ -30,6 +31,13 @@ print(array_c[0,1]) #imprime el elemento [0,1]
 
 print(array_c[:,1]) #imprime todos los elementos de la columna 1
 
+print(array_b.ravel()) #retorna el arreglo horizontal
+
+print(np.split(array_b,2)) #divide el array en dos
+
+print(np.sort(array_b))  #arreglo ordenado de mayor a menor
+
+print("check")
 
 ############### default arrays ####################
 
@@ -77,6 +85,14 @@ print(array_x.cumsum()) #suma acumulada de los elementos anteriores
 print(array_x.prod())   #multiplicacion
 print(array_x.cumprod()) #multiplicacion e los elementos anteriores
 
+array_x *=3             #modifica el array actual cada elemento *3
+print(array_x) 
+
+print(array_x.min())  #encuentra el minimo
+print(array_x.max())  #encuentra el minimo
+
+
+
 #operaciones con mas de un array
 
 print(array_x + array_y)      #son todas operaciones uno a uno
@@ -85,6 +101,15 @@ print(array_x * array_y)
 print(array_x / array_y)
 
 print(np.dot(array_x,array_y))   #multiplicacion vectorial de matrices
+print(array_x @ array_y)         #@ tambien simboliza mult matricial
+
+
+print(10*np.sin(array_x))        #funcion trigonometrica aplicada a un array
+
+array_copy = array_x.copy()     #hace una copia exacta del arraglo
+print(array_copy)
+
+
 
 ################# broadcasting ###################
 #significa que si queremos realizar operaciones sin que tengan el tamaño adecuado broadcasting completa los elementos faltantes repitiendo los elementos 
@@ -92,3 +117,26 @@ print(np.dot(array_x,array_y))   #multiplicacion vectorial de matrices
 array_z = np.array([[1,2]])
 
 print(array_x + array_z)
+
+###################3 upcasting ##################
+#toma el tipo de variable mas especifica ej si se opera con un float y un int el resultado debe ser un float
+
+a = np.ones(3, dtype=np.int32)
+b = np.linspace(0, 3.14, 3)
+print(b.dtype)
+
+c = a + b
+print(c)
+
+################## Save and load Numpy objetcs ############
+
+np.save("array_c",c)            #guarda el array con sus carateristicas de tipo,etc en formato .npy
+
+np.load("array_c.npy")          #abre el arreglo
+
+print(c)
+
+np.savetxt("array_c.txt",c)     #guarda en exension .txt                                
+np.savetxt("array_c.csv",c)     #guarda en exension .csv    
+
+np.loadtxt("array_c.txt") 
